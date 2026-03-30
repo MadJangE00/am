@@ -6,6 +6,9 @@ import { prisma } from "./prisma";
 
 export const { handlers, auth, signIn, signOut } = NextAuth({
   adapter: PrismaAdapter(prisma),
+  logger: {
+    error: (error) => console.error("[NextAuth Error]", error),
+  },
   providers: [
     GitHub({
       clientId: process.env.GITHUB_CLIENT_ID!,
